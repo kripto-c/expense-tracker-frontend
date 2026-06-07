@@ -122,6 +122,7 @@ export interface LoginResponse {
 export interface RegisterPayload {
   email: string
   password: string
+  name?: string
 }
 
 // ──────────────────────────────────────────────
