@@ -1,3 +1,6 @@
 export { Button } from './button'
 export { Input } from './input'
 export { Card, CardHeader, CardTitle } from './card'
+export { Table, TablePagination } from './table'
+export type { Column, SortDirection, SortState, PaginationConfig, TableProps } from './table'
+export { Modal } from './modal'

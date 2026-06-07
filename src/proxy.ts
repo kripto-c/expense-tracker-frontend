@@ -1,27 +1,35 @@
 // ──────────────────────────────────────────────
-// Proxy — protege rutas del dashboard
-// Lee la cookie HttpOnly 'token' que setea el backend
+// Proxy — auth guard + strip Origin en /api
 // ──────────────────────────────────────────────
 
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-const publicPaths = ['/', '/auth/login']
+const publicPaths = ['/', '/auth/login', '/auth/register']
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
-  const token = request.cookies.get('token')?.value
 
-  // Si no hay token y la ruta no es pública → redirect a login
-  if (!token && !publicPaths.includes(pathname) && !pathname.startsWith('/_next')) {
-    const loginUrl = new URL('/', request.url)
-    return NextResponse.redirect(loginUrl)
+  // ── API calls: sacar Origin para evitar CORS del backend ──
+  if (pathname.startsWith('/api')) {
+    const requestHeaders = new Headers(request.headers)
+    requestHeaders.delete('origin')
+    requestHeaders.delete('sec-fetch-mode')
+
+    return NextResponse.next({
+      request: { headers: requestHeaders },
+    })
   }
 
-  // Si hay token y está en login → redirect a dashboard
-  if (token && (pathname === '/' || pathname === '/auth/login')) {
-    const dashboardUrl = new URL('/dashboard', request.url)
-    return NextResponse.redirect(dashboardUrl)
+  // ── Pages: auth guard ──
+  const token = request.cookies.get('token')?.value
+
+  if (!token && !publicPaths.includes(pathname) && !pathname.startsWith('/_next')) {
+    return NextResponse.redirect(new URL('/', request.url))
+  }
+
+  if (token && (pathname === '/' || pathname === '/auth/login' || pathname === '/auth/register')) {
+    return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
   return NextResponse.next()

@@ -1,5 +1,122 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ── Theme tokens (default = light) ──────────── */
+@theme {
+  --color-sidebar-bg: var(--sidebar-bg);
+  --color-sidebar-hover: var(--sidebar-hover);
+  --color-sidebar-active: var(--sidebar-active);
+  --color-sidebar-text: var(--sidebar-text);
+  --color-sidebar-text-active: var(--sidebar-text-active);
+  --color-sidebar-border: var(--sidebar-border);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-active: var(--primary-active);
+  --color-primary-light: var(--primary-light);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-light: var(--accent-light);
+
+  --color-danger: var(--danger);
+  --color-danger-hover: var(--danger-hover);
+  --color-danger-light: var(--danger-light);
+  --color-warning: var(--warning);
+  --color-warning-light: var(--warning-light);
+
+  --color-canvas: var(--canvas);
+  --color-canvas-alt: var(--canvas-alt);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-border: var(--surface-border);
+  --color-surface-border-light: var(--surface-border-light);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-muted: var(--text-muted);
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+}
+
+/* ── Light mode ──────────────────────────────── */
+:root {
+  --sidebar-bg: #0f0d2e;
+  --sidebar-hover: #1a1747;
+  --sidebar-active: #2d2a6e;
+  --sidebar-text: #a5b4fc;
+  --sidebar-text-active: #ffffff;
+  --sidebar-border: #1e1b4b;
+
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --primary-active: #4338ca;
+  --primary-light: #eef2ff;
+
+  --accent: #10b981;
+  --accent-hover: #059669;
+  --accent-light: #d1fae5;
+
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+  --danger-light: #fee2e2;
+  --warning: #f59e0b;
+  --warning-light: #fef3c7;
+
+  --canvas: #f1f5f9;
+  --canvas-alt: #e2e8f0;
+  --surface: #ffffff;
+  --surface-hover: #f8fafc;
+  --surface-border: #e2e8f0;
+  --surface-border-light: #f1f5f9;
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-tertiary: #94a3b8;
+  --text-muted: #cbd5e1;
+}
+
+/* ── Dark mode ───────────────────────────────── */
+.dark {
+  --sidebar-bg: #0a0a1a;
+  --sidebar-hover: #14143a;
+  --sidebar-active: #25256a;
+  --sidebar-text: #818cf8;
+  --sidebar-text-active: #ffffff;
+  --sidebar-border: #1a1a3a;
+
+  --primary: #818cf8;
+  --primary-hover: #6366f1;
+  --primary-active: #4f46e5;
+  --primary-light: #1e1b4b;
+
+  --accent: #34d399;
+  --accent-hover: #10b981;
+  --accent-light: #064e3b;
+
+  --danger: #f87171;
+  --danger-hover: #ef4444;
+  --danger-light: #450a0a;
+  --warning: #fbbf24;
+  --warning-light: #451a03;
+
+  --canvas: #0b1120;
+  --canvas-alt: #0f172a;
+  --surface: #1e293b;
+  --surface-hover: #263348;
+  --surface-border: #334155;
+  --surface-border-light: #1e293b;
+
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+  --text-muted: #475569;
+}
+
+/* ── Base ────────────────────────────────────── */
 *,
 *::before,
 *::after {
@@ -8,8 +125,21 @@
 
 body {
   min-height: 100vh;
-  background: #fafafa;
-  color: #18181b;
+  background: var(--canvas);
+  color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* ── Animations ──────────────────────────────── */
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
