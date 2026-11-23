@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Expense Tracker — Frontend
+
+Frontend para la aplicación de gestión de gastos compartidos. Construido con Next.js 16 App Router, Tailwind CSS v4 y TypeScript estricto.
+
+## Stack
+
+| Capa | Tecnología |
+|------|-----------|
+| Framework | Next.js 16 (App Router, Turbopack) |
+| Estilos | Tailwind CSS v4 con tokens de tema vía CSS variables |
+| Estado global | Zustand v5 |
+| Server state | TanStack Query v5 |
+| HTTP client | ky v2 |
+| Fuente | Inter (Google Fonts) |
+| Notificaciones | react-hot-toast |
+
+## Requisitos
+
+- Node.js 24.22.3+
+- pnpm
+- Backend corriendo en `http://localhost:3000` ([expense-tracker-api](https://github.com/...))
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev --port 3001
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+El frontend arranca en **http://localhost:3001**. Los requests a `/api/*` se redirigen al backend en `http://localhost:3000/api/*` vía Next.js rewrites.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Si el build está cacheado con CSS viejo, borrar el caché antes de arrancar:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+rm -rf .next && pnpm dev --port 3001
+```
 
-## Learn More
+## Rutas
 
-To learn more about Next.js, take a look at the following resources:
+| Ruta | Descripción |
+|------|-------------|
+| `/` | Login |
+| `/auth/register` | Registro |
+| `/dashboard` | Dashboard principal |
+| `/dashboard/groups` | CRUD de grupos |
+| `/dashboard/expenses` | CRUD de gastos |
+| `/dashboard/profile` | Perfil de usuario |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+El middleware (`src/proxy.ts`) protege las rutas del dashboard y redirige a `/` si no hay token.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Features
 
-## Deploy on Vercel
+- **Autenticación** — login, registro, logout con JWT vía cookies
+- **Dark mode** — toggle con persistencia en localStorage, inline script anti-flash, SSR-safe
+- **Sidebar colapsable** — navegación principal con iconos
+- **CRUD de grupos** — modal reutilizable, formularios controlados
+- **CRUD de gastos** — tabla con acciones, split types, tooltips
+- **Paleta indigo** — sistema de colores personalizado vía CSS variables con overrides para dark mode
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Arquitectura
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/            # Next.js App Router pages
+│   ├── auth/register/
+│   ├── dashboard/
+│   │   ├── expenses/
+│   │   ├── groups/
+│   │   └── profile/
+│   └── page.tsx    # Login (raíz)
+├── components/
+│   ├── layout/     # Header, Sidebar
+│   ├── groups/     # GroupForm, etc.
+│   └── ui/         # Button, Card, Input, Modal, Table
+├── hooks/          # useAuth, useService
+├── lib/
+│   ├── api/        # API client (ky) + auth endpoints
+│   └── utils/      # cn() helper
+├── stores/         # Zustand stores (auth, theme, layout)
+└── types/          # TypeScript interfaces
+```
+
+## Estructura de estilos
+
+Las variables de color se definen en `src/app/globals.css` usando CSS nativo:
+
+- `:root` — valores del tema claro
+- `.dark` — overrides para modo oscuro
+- `@theme` — mapeo de tokens de Tailwind a las variables CSS
+
+## Backend
+
+El backend esperado es una API REST en Express con los siguientes endpoints:
+
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `POST /api/auth/logout`
+- `GET /api/groups` (y CRUD completo)
+- `GET /api/expenses` (y CRUD completo)
+- Autenticación via JWT en cookie `token`
