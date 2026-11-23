@@ -1,5 +1,5 @@
 // ──────────────────────────────────────────────
-// Layout store — sidebar state
+// Store de layout — estado de la barra lateral
 // ──────────────────────────────────────────────
 
 import { create } from 'zustand'

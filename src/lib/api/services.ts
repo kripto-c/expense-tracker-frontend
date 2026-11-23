@@ -1,5 +1,5 @@
 // ──────────────────────────────────────────────
-// Resource services — mirrors the backend endpoints
+// Servicios de recursos — reflejan los endpoints del backend
 // ──────────────────────────────────────────────
 
 import { api, createAuthClient } from './client'
@@ -12,7 +12,7 @@ import type {
   PaginatedResponse,
 } from '@/types'
 
-// ── Helpers ──────────────────────────────────
+// ── Utilidades ───────────────────────────────
 
 function buildQuery(params?: Record<string, unknown>): string {
   if (!params) return ''
@@ -30,7 +30,7 @@ function buildQuery(params?: Record<string, unknown>): string {
   return qs ? `?${qs}` : ''
 }
 
-// ── Generic service factory ──────────────────
+// ── Fábrica genérica de servicios ────────────
 
 function createService<T>(resource: string) {
   return {
@@ -51,7 +51,7 @@ function createService<T>(resource: string) {
   }
 }
 
-// ── Specific services ────────────────────────
+// ── Servicios específicos ────────────────────
 
 export const groupService = {
   ...createService<Group>('groups'),

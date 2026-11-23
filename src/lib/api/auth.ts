@@ -1,5 +1,5 @@
 // ──────────────────────────────────────────────
-// Auth API — register, login, logout
+// API de autenticación — registro, inicio y cierre de sesión
 // ──────────────────────────────────────────────
 
 import { api } from './client'

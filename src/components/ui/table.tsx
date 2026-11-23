@@ -1,7 +1,7 @@
 // ──────────────────────────────────────────────
-// Table — reusable generic data table
-// API style: Ant Design Table patterns
-// Styling: minimal, clean, consistent with project
+// Table — tabla de datos genérica y reutilizable
+// Estilo de API: patrones de Ant Design Table
+// Estilos: minimalistas, limpios y coherentes con el proyecto
 // ──────────────────────────────────────────────
 
 'use client'
@@ -9,22 +9,22 @@
 import { cn } from '@/lib/utils'
 import { useCallback, useMemo, useRef, useEffect, type ReactNode, type ComponentPropsWithoutRef } from 'react'
 
-// ── Types ──────────────────────────────────────
+// ── Tipos ──────────────────────────────────────
 
 export interface Column<T> {
-  /** Unique identifier for the column */
+  /** Identificador único de la columna */
   key: string
-  /** Header text */
+  /** Texto del encabezado */
   title: string
-  /** Key into the record to extract the cell value (optional if using render) */
+  /** Clave del registro para extraer el valor de la celda (opcional si se usa render) */
   dataIndex?: keyof T
-  /** Enable click-to-sort on this column */
+  /** Habilita el ordenamiento al hacer clic en esta columna */
   sortable?: boolean
-  /** Fixed width (px or percentage) */
+  /** Ancho fijo (px o porcentaje) */
   width?: number | string
-  /** Additional class for both header and cells in this column */
+  /** Clase adicional para el encabezado y las celdas de esta columna */
   className?: string
-  /** Custom render function. Receives (value, record, index) */
+  /** Función de renderizado personalizada. Recibe (value, record, index) */
   render?: (value: unknown, record: T, index: number) => ReactNode
 }
 
@@ -45,30 +45,30 @@ export interface PaginationConfig {
 export interface TableProps<T> {
   columns: Column<T>[]
   data: T[]
-  /** Key extractor — defaults to `record.id` */
+  /** Extractor de clave — por defecto `record.id` */
   rowKey?: keyof T | ((record: T) => string)
-  /** Show loading skeleton */
+  /** Muestra el esqueleto de carga */
   loading?: boolean
-  /** Bottom pagination. Omit to hide. */
+  /** Paginación inferior. Omitir para ocultarla. */
   pagination?: PaginationConfig
-  /** Current sort state (controlled) */
+  /** Estado de ordenamiento actual (controlado) */
   sort?: SortState | null
-  /** Called when a sortable header is clicked */
+  /** Se llama al hacer clic en un encabezado ordenable */
   onSort?: (key: string, direction: SortDirection) => void
-  /** Called when a row body is clicked */
+  /** Se llama al hacer clic en una fila */
   onRowClick?: (record: T) => void
-  /** Selected row keys for checkbox selection */
+  /** Claves de las filas seleccionadas mediante checkbox */
   selectedRowKeys?: string[]
-  /** Called when selection changes */
+  /** Se llama cuando cambia la selección */
   onSelectionChange?: (keys: string[]) => void
-  /** Text when data is empty */
+  /** Texto cuando no hay datos */
   emptyText?: string
   className?: string
-  /** Props passed to the wrapping div */
+  /** Props que se pasan al div contenedor */
   wrapperProps?: ComponentPropsWithoutRef<'div'>
 }
 
-// ── Helpers ────────────────────────────────────
+// ── Utilidades ─────────────────────────────────
 
 function getRowKey<T>(record: T, rowKey?: keyof T | ((r: T) => string)): string {
   if (typeof rowKey === 'function') return rowKey(record)
@@ -84,7 +84,7 @@ function getCellValue<T>(record: T, column: Column<T>): unknown {
   return undefined
 }
 
-// ── Sort Arrows ────────────────────────────────
+// ── Flechas de ordenamiento ────────────────────
 
 function SortIcon({
   direction,
@@ -119,7 +119,7 @@ function SortIcon({
   )
 }
 
-// ── Pagination ─────────────────────────────────
+// ── Paginación ─────────────────────────────────
 
 function Pagination({ page, pageSize, total, onChange }: PaginationConfig) {
   const totalPages = Math.ceil(total / pageSize)
@@ -232,7 +232,7 @@ function Pagination({ page, pageSize, total, onChange }: PaginationConfig) {
 
 export { Pagination as TablePagination }
 
-// ── Loading Skeleton ───────────────────────────
+// ── Esqueleto de carga ─────────────────────────
 
 function TableSkeleton({
   colCount,
@@ -259,7 +259,7 @@ function TableSkeleton({
   )
 }
 
-// ── Empty State ────────────────────────────────
+// ── Estado vacío ───────────────────────────────
 
 function EmptyRow({ colSpan, text }: { colSpan: number; text: string }) {
   return (
@@ -289,7 +289,7 @@ function EmptyRow({ colSpan, text }: { colSpan: number; text: string }) {
   )
 }
 
-// ── Checkbox ───────────────────────────────────
+// ── Casilla de selección ───────────────────────
 
 function RowCheckbox({
   checked,
@@ -325,7 +325,7 @@ function RowCheckbox({
   )
 }
 
-// ── Main Component ─────────────────────────────
+// ── Componente principal ───────────────────────
 
 export function Table<T extends object>({
   columns,
@@ -391,7 +391,7 @@ export function Table<T extends object>({
     >
       <div className="overflow-x-auto">
         <table className="w-full border-collapse text-left">
-          {/* ── HEAD ──────────────────────────── */}
+          {/* ── ENCABEZADO ────────────────────── */}
           <thead className="bg-surface-hover">
             <tr>
               {showSelection && (
@@ -440,7 +440,7 @@ export function Table<T extends object>({
             </tr>
           </thead>
 
-          {/* ── BODY ──────────────────────────── */}
+          {/* ── CUERPO ────────────────────────── */}
           {loading ? (
             <TableSkeleton
               colCount={columns.length + (showSelection ? 1 : 0)}
@@ -500,7 +500,7 @@ export function Table<T extends object>({
         </table>
       </div>
 
-      {/* ── PAGINATION ───────────────────────── */}
+      {/* ── PAGINACIÓN ───────────────────────── */}
       {pagination && <Pagination {...pagination} />}
     </div>
   )

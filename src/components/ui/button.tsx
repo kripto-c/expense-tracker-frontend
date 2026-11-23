@@ -1,5 +1,5 @@
 // ──────────────────────────────────────────────
-// Button — con nueva paleta de colores
+// Button — botón con nueva paleta de colores
 // ──────────────────────────────────────────────
 
 import { cn } from '@/lib/utils'

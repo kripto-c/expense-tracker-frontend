@@ -1,5 +1,5 @@
 // ──────────────────────────────────────────────
-// useService — React Query wrappers genéricos
+// useService — wrappers genéricos de React Query
 // ──────────────────────────────────────────────
 
 'use client'
@@ -45,7 +45,7 @@ export function useGet<T>(
 /**
  * Hook genérico para mutaciones create / patch / remove.
  * Invalida las queryKeys al completar, y devuelve mutateAsync
- * para que el caller maneje onSuccess/onError desde la llamada.
+ * para que quien llama maneje onSuccess/onError desde la llamada.
  */
 export function useServiceMutation<TData, TVariables>(
   mutationFn: (vars: TVariables) => Promise<TData>,

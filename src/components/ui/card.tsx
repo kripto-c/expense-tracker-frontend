@@ -1,5 +1,5 @@
 // ──────────────────────────────────────────────
-// Card — con nueva paleta de colores
+// Card — tarjeta con nueva paleta de colores
 // ──────────────────────────────────────────────
 
 import { cn } from '@/lib/utils'

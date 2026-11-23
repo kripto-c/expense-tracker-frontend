@@ -1,5 +1,5 @@
 // ──────────────────────────────────────────────
-// Dominion types — mirror del schema Prisma
+// Tipos de dominio — reflejo del schema de Prisma
 // ──────────────────────────────────────────────
 
 export interface User {
@@ -19,7 +19,7 @@ export interface Group {
   dailyExpenseLimit: number
   createdAt: string
   updatedAt: string
-  /** Populated by backend hooks */
+  /** Poblado por los hooks del backend */
   members?: GroupMember[]
 }
 
@@ -29,7 +29,7 @@ export interface GroupMember {
   groupId: string
   role: 'admin' | 'member'
   joinedAt: string
-  /** Populated by backend hooks */
+  /** Poblado por los hooks del backend */
   userData?: Pick<User, 'id' | 'name' | 'email'>
 }
 
@@ -43,9 +43,9 @@ export interface Expense {
   splitType: SplitType
   createdAt: string
   updatedAt: string
-  /** Populated by backend hooks */
+  /** Poblado por los hooks del backend */
   group?: Pick<Group, 'id' | 'name'>
-  /** Populated by backend hooks */
+  /** Poblado por los hooks del backend */
   payer?: Pick<User, 'id' | 'name' | 'email'>
   shares?: ExpenseShare[]
 }
@@ -76,7 +76,7 @@ export interface UserRole {
 }
 
 // ──────────────────────────────────────────────
-// Supporting types
+// Tipos auxiliares
 // ──────────────────────────────────────────────
 
 export type SplitType = 'equal' | 'percentage'
@@ -95,7 +95,7 @@ export interface ApiError {
 }
 
 // ──────────────────────────────────────────────
-// API response shapes
+// Estructuras de respuesta de la API
 // ──────────────────────────────────────────────
 
 export interface PaginatedResponse<T> {

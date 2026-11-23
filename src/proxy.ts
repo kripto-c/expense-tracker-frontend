@@ -1,5 +1,5 @@
 // ──────────────────────────────────────────────
-// Proxy — auth guard + strip Origin en /api
+// Proxy — protección de rutas autenticadas + eliminación de Origin en /api
 // ──────────────────────────────────────────────
 
 import { NextResponse } from 'next/server'
@@ -10,7 +10,7 @@ const publicPaths = ['/', '/auth/login', '/auth/register']
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // ── API calls: sacar Origin para evitar CORS del backend ──
+  // ── Llamadas a la API: quitar Origin para evitar CORS del backend ──
   if (pathname.startsWith('/api')) {
     const requestHeaders = new Headers(request.headers)
     requestHeaders.delete('origin')
@@ -21,7 +21,7 @@ export function proxy(request: NextRequest) {
     })
   }
 
-  // ── Pages: auth guard ──
+  // ── Páginas: protección de autenticación ──
   const token = request.cookies.get('token')?.value
 
   if (!token && !publicPaths.includes(pathname) && !pathname.startsWith('/_next')) {

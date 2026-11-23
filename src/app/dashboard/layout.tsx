@@ -1,5 +1,5 @@
 // ──────────────────────────────────────────────
-// Dashboard layout — sidebar + header
+// Layout del dashboard — barra lateral + encabezado
 // ──────────────────────────────────────────────
 
 import { Sidebar } from '@/components/layout/sidebar'

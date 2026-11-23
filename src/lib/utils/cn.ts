@@ -1,5 +1,5 @@
 // ──────────────────────────────────────────────
-// classnames helper — merges Tailwind classes
+// Utilidad de classnames — combina clases de Tailwind
 // ──────────────────────────────────────────────
 
 type ClassValue = string | number | boolean | null | undefined | ClassValue[]

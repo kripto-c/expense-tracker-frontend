@@ -11,7 +11,7 @@ import { useLayoutStore } from '@/stores/layout'
 
 const navItems = [
   {
-    label: 'Dashboard',
+    label: 'Panel',
     href: '/dashboard',
     icon: (
       <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -67,7 +67,7 @@ export function Sidebar() {
         sidebarCollapsed ? 'w-16' : 'w-64',
       )}
     >
-      {/* Logo */}
+      {/* Logotipo */}
       <div className="flex h-16 items-center gap-3 border-b border-sidebar-border px-4">
         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-400 to-purple-500">
           <span className="text-sm font-bold text-white">E</span>
@@ -79,7 +79,7 @@ export function Sidebar() {
         )}
       </div>
 
-      {/* Nav */}
+      {/* Navegación */}
       <nav className="flex-1 space-y-1 p-3">
         {navItems.map((item) => {
           const isActive =
@@ -108,7 +108,7 @@ export function Sidebar() {
         })}
       </nav>
 
-      {/* Footer */}
+      {/* Pie */}
       {!sidebarCollapsed && (
         <div className="border-t border-sidebar-border p-4">
           <p className="text-xs text-sidebar-text/50">Expense Tracker v1</p>

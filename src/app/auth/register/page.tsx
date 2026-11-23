@@ -1,5 +1,5 @@
 // ──────────────────────────────────────────────
-// Register page
+// Página de registro
 // ──────────────────────────────────────────────
 
 'use client'
@@ -23,7 +23,7 @@ export default function RegisterPage() {
     setError(null)
 
     if (!email || !password) {
-      setError('Completá todos los campos obligatorios')
+      setError('Completa todos los campos obligatorios')
       return
     }
 
@@ -41,7 +41,7 @@ export default function RegisterPage() {
       { email, password, name: name || undefined },
       {
         onSuccess: () => {
-          toast.success('Registrado con éxito. Ahora iniciá sesión.')
+          toast.success('Registro exitoso. Ahora inicia sesión.')
         },
         onError: (err) => {
           const message = err.message || 'Error al registrarse'
@@ -54,21 +54,21 @@ export default function RegisterPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-indigo-950 via-indigo-900 to-slate-900 px-4">
-      {/* Background decorative */}
+      {/* Fondo decorativo */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
         <div className="absolute -left-40 -top-40 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
         <div className="absolute -bottom-40 -right-40 h-80 w-80 rounded-full bg-purple-500/10 blur-3xl" />
       </div>
 
       <Card className="relative w-full max-w-sm border-surface-border/50 bg-white/95 p-8 shadow-2xl backdrop-blur-sm">
-        {/* Brand */}
+        {/* Marca */}
         <div className="mb-8 text-center">
           <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg shadow-indigo-500/25">
             <span className="text-xl font-bold text-white">E</span>
           </div>
           <h1 className="text-xl font-bold text-text-primary">Crear cuenta</h1>
           <p className="mt-1 text-sm text-text-tertiary">
-            Registrate para empezar a usar Expense Tracker
+            Regístrate para empezar a usar Expense Tracker
           </p>
         </div>
 
@@ -130,12 +130,12 @@ export default function RegisterPage() {
         </form>
 
         <p className="mt-6 text-center text-sm text-text-tertiary">
-          ¿Ya tenés cuenta?{' '}
+          ¿Ya tienes cuenta?{' '}
           <Link
             href="/"
             className="font-medium text-primary transition-colors hover:text-primary-hover"
           >
-            Iniciá sesión
+            Inicia sesión
           </Link>
         </p>
       </Card>

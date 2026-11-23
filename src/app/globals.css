@@ -2,7 +2,7 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* ── Theme tokens (default = light) ──────────── */
+/* ── Tokens de tema (por defecto = claro) ───── */
 @theme {
   --color-sidebar-bg: var(--sidebar-bg);
   --color-sidebar-hover: var(--sidebar-hover);
@@ -42,7 +42,7 @@
   --color-black: #000000;
 }
 
-/* ── Light mode ──────────────────────────────── */
+/* ── Modo claro ──────────────────────────────── */
 :root {
   --sidebar-bg: #0f0d2e;
   --sidebar-hover: #1a1747;
@@ -79,7 +79,7 @@
   --text-muted: #cbd5e1;
 }
 
-/* ── Dark mode ───────────────────────────────── */
+/* ── Modo oscuro ─────────────────────────────── */
 .dark {
   --sidebar-bg: #0a0a1a;
   --sidebar-hover: #14143a;
@@ -132,7 +132,7 @@ body {
   transition: background-color 0.2s, color 0.2s;
 }
 
-/* ── Animations ──────────────────────────────── */
+/* ── Animaciones ─────────────────────────────── */
 @keyframes modal-in {
   from {
     opacity: 0;

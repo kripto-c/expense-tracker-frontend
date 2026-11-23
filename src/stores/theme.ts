@@ -1,10 +1,10 @@
 // ──────────────────────────────────────────────
-// Theme store — dark mode
+// Store de tema — modo oscuro
 // ──────────────────────────────────────────────
-// SSR-safe: inline script in layout.tsx sets the
-// class on <html> before hydration. The store
-// starts with isDark=false (server render) and
-// the Header syncs with the DOM after mount.
+// Seguro para SSR: el script inline de layout.tsx asigna
+// la clase en <html> antes de la hidratación. El store
+// inicia con isDark=false (render del servidor) y
+// el Header se sincroniza con el DOM tras el montaje.
 
 import { create } from 'zustand'
 
@@ -16,7 +16,7 @@ interface ThemeState {
 }
 
 export const useThemeStore = create<ThemeState>((set) => ({
-  // SSR-safe default — Header useEfffect syncs after mount
+  // Valor por defecto seguro para SSR — el useEffect del Header sincroniza tras el montaje
   isDark: false,
 
   toggle: () =>

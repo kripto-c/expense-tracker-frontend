@@ -1,5 +1,5 @@
 // ──────────────────────────────────────────────
-// Modal — reusable dialog con overlay
+// Modal — diálogo reutilizable con overlay
 // ──────────────────────────────────────────────
 
 'use client'
@@ -39,7 +39,7 @@ export function Modal({
   const overlayRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
 
-  // Escape key
+  // Tecla Escape
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
@@ -58,7 +58,7 @@ export function Modal({
     }
   }, [open, handleKeyDown])
 
-  // Focus trap — keep focus inside modal when open
+  // Trampa de foco — mantiene el foco dentro del modal mientras está abierto
   useEffect(() => {
     if (open && contentRef.current) {
       const firstFocusable = contentRef.current.querySelector<HTMLElement>(
@@ -92,7 +92,7 @@ export function Modal({
           animation: 'modal-in 0.15s ease-out',
         }}
       >
-        {/* Header */}
+        {/* Encabezado */}
         {(title || description) && (
           <div className="mb-5">
             {title && (
@@ -104,10 +104,10 @@ export function Modal({
           </div>
         )}
 
-        {/* Body */}
+        {/* Cuerpo */}
         <div className="text-sm text-text-secondary">{children}</div>
 
-        {/* Footer */}
+        {/* Pie */}
         {footer && (
           <div className="mt-6 flex items-center justify-end gap-3 border-t border-surface-border pt-4">
             {footer}

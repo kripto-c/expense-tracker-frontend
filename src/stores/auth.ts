@@ -1,5 +1,5 @@
 // ──────────────────────────────────────────────
-// Auth store — Zustand
+// Store de autenticación — Zustand
 // ──────────────────────────────────────────────
 
 import { create } from 'zustand'

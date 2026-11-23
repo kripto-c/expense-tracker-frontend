@@ -1,5 +1,5 @@
 // ──────────────────────────────────────────────
-// API client — ky instance
+// Cliente de la API — instancia de ky
 // Usa URL relativa /api/* → Next.js rewrite →
 // http://localhost:3000/api/* (sin CORS)
 // ──────────────────────────────────────────────

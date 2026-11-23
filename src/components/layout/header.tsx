@@ -1,5 +1,5 @@
 // ──────────────────────────────────────────────
-// Header — barra superior con menú usuario y notificaciones
+// Header — barra superior con menú de usuario y notificaciones
 // ──────────────────────────────────────────────
 
 'use client'
@@ -11,14 +11,14 @@ import { useLayoutStore } from '@/stores/layout'
 import { useThemeStore } from '@/stores/theme'
 import { cn } from '@/lib/utils'
 
-// ── Hydration-safe theme toggle ───────────────
+// ── Selector de tema seguro para hidratación ──
 
 function ThemeToggle() {
   const [mounted, setMounted] = useState(false)
   const { isDark, toggle } = useThemeStore()
 
   useEffect(() => {
-    // Sync store with the class set by the inline <script> in layout.tsx
+    // Sincroniza el store con la clase que asigna el <script> inline de layout.tsx
     const domIsDark = document.documentElement.classList.contains('dark')
     if (domIsDark !== isDark) {
       useThemeStore.setState({ isDark: domIsDark })
@@ -27,7 +27,7 @@ function ThemeToggle() {
   }, [])
 
   if (!mounted) {
-    return <div className="h-9 w-9" /> // spacer while not hydrated
+    return <div className="h-9 w-9" /> // espaciador mientras no se hidrata
   }
 
   return (
@@ -58,7 +58,7 @@ function ThemeToggle() {
   )
 }
 
-// ── Hook: click outside ───────────────────────
+// ── Hook: clic fuera del elemento ─────────────
 
 function useClickOutside<T extends HTMLElement>(
   handler: () => void,
@@ -78,7 +78,7 @@ function useClickOutside<T extends HTMLElement>(
   return ref
 }
 
-// ── Notificaciones placeholder ────────────────
+// ── Notificaciones de ejemplo ─────────────────
 
 const notifications = [
   {
@@ -92,7 +92,7 @@ const notifications = [
     id: '2',
     title: 'Miembro agregado',
     description: 'Bob se unió al grupo Casa',
-    time: 'hace 2 hs',
+    time: 'hace 2 h',
     unread: true,
   },
   {
@@ -104,7 +104,7 @@ const notifications = [
   },
 ]
 
-// ── Dropdown wrapper ──────────────────────────
+// ── Contenedor del menú desplegable ───────────
 
 function Dropdown({
   trigger,
@@ -191,12 +191,12 @@ export function Header() {
 
   return (
     <header className="flex h-16 items-center justify-between border-b border-surface-border bg-surface px-4 lg:px-6">
-      {/* Left — toggle sidebar */}
+      {/* Izquierda — alternar barra lateral */}
       <div className="flex items-center gap-3">
         <button
           onClick={toggleSidebar}
           className="flex h-9 w-9 items-center justify-center rounded-lg text-text-tertiary transition-colors hover:bg-surface-hover hover:text-text-primary"
-          aria-label={sidebarCollapsed ? 'Expandir sidebar' : 'Colapsar sidebar'}
+          aria-label={sidebarCollapsed ? 'Expandir barra lateral' : 'Contraer barra lateral'}
         >
           <svg
             className="h-5 w-5"
@@ -223,12 +223,12 @@ export function Header() {
         </button>
       </div>
 
-      {/* Right — theme + notifications + user */}
+      {/* Derecha — tema + notificaciones + usuario */}
       <div className="flex items-center gap-1">
 
-        {/* ── Theme toggle ── */}
+        {/* ── Selector de tema ── */}
         <ThemeToggle />
-        {/* ── Notifications ── */}
+        {/* ── Notificaciones ── */}
         <Dropdown
           trigger={
             <div className="relative flex h-9 w-9 items-center justify-center rounded-lg text-text-tertiary hover:bg-surface-hover hover:text-text-primary">
@@ -263,7 +263,7 @@ export function Header() {
           <div className="max-h-64 space-y-0.5 overflow-y-auto">
             {notifications.length === 0 ? (
               <p className="px-3 py-6 text-center text-sm text-text-tertiary">
-                No tenés notificaciones
+                No tienes notificaciones
               </p>
             ) : (
               notifications.map((n) => (
@@ -298,7 +298,7 @@ export function Header() {
           </div>
         </Dropdown>
 
-        {/* ── User dropdown ── */}
+        {/* ── Menú de usuario ── */}
         <Dropdown
           trigger={
             <div className="flex items-center gap-2 rounded-lg px-2 py-1.5 hover:bg-surface-hover">
@@ -320,7 +320,7 @@ export function Header() {
           }
           className="w-56"
         >
-          {/* User info */}
+          {/* Información del usuario */}
           <div className="px-3 py-2">
             <p className="text-sm font-medium text-text-primary">
               {user?.name || 'Usuario'}
